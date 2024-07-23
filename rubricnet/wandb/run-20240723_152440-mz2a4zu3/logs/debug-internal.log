@@ -1,0 +1,73 @@
+2024-07-23 15:24:40,619 INFO    StreamThr :22298 [internal.py:wandb_internal():85] W&B internal server running at pid: 22298, started at: 2024-07-23 15:24:40.618854
+2024-07-23 15:24:40,622 DEBUG   HandlerThread:22298 [handler.py:handle_request():158] handle_request: status
+2024-07-23 15:24:40,637 INFO    WriterThread:22298 [datastore.py:open_for_write():87] open: ./wandb/run-20240723_152440-mz2a4zu3/run-mz2a4zu3.wandb
+2024-07-23 15:24:40,639 DEBUG   SenderThread:22298 [sender.py:send():379] send: header
+2024-07-23 15:24:40,639 DEBUG   SenderThread:22298 [sender.py:send():379] send: run
+2024-07-23 15:24:40,641 INFO    SenderThread:22298 [sender.py:_setup_resume():749] checking resume status for anonymous/explainable/mz2a4zu3
+2024-07-23 15:24:44,064 INFO    SenderThread:22298 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connection.py", line 196, in _new_conn
+    sock = connection.create_connection(
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connection.py", line 398, in request
+    self.endheaders()
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/http/client.py", line 1280, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/http/client.py", line 1040, in _send_output
+    self.send(msg)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/http/client.py", line 980, in send
+    self.connect()
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x73bc790afa60>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x73bc790afa60>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 340, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/pedro/miniconda3/envs/RAGrove/lib/python3.9/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x73bc790afa60>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-07-23 15:24:45,642 DEBUG   HandlerThread:22298 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-23 15:24:50,645 DEBUG   HandlerThread:22298 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-23 15:24:55,648 DEBUG   HandlerThread:22298 [handler.py:handle_request():158] handle_request: keepalive

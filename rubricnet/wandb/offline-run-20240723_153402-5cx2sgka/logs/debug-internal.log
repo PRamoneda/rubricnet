@@ -1,0 +1,21 @@
+2024-07-23 15:34:02,555 INFO    StreamThr :23818 [internal.py:wandb_internal():85] W&B internal server running at pid: 23818, started at: 2024-07-23 15:34:02.554220
+2024-07-23 15:34:02,557 DEBUG   HandlerThread:23818 [handler.py:handle_request():158] handle_request: status
+2024-07-23 15:34:02,566 INFO    WriterThread:23818 [datastore.py:open_for_write():87] open: ./wandb/offline-run-20240723_153402-5cx2sgka/run-5cx2sgka.wandb
+2024-07-23 15:34:02,616 DEBUG   HandlerThread:23818 [handler.py:handle_request():158] handle_request: run_start
+2024-07-23 15:34:02,634 DEBUG   HandlerThread:23818 [system_info.py:__init__():26] System info init
+2024-07-23 15:34:02,634 DEBUG   HandlerThread:23818 [system_info.py:__init__():41] System info init done
+2024-07-23 15:34:02,634 INFO    HandlerThread:23818 [system_monitor.py:start():194] Starting system monitor
+2024-07-23 15:34:02,635 INFO    SystemMonitor:23818 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-23 15:34:02,635 INFO    HandlerThread:23818 [system_monitor.py:probe():214] Collecting system info
+2024-07-23 15:34:02,636 INFO    SystemMonitor:23818 [interfaces.py:start():188] Started cpu monitoring
+2024-07-23 15:34:02,638 INFO    SystemMonitor:23818 [interfaces.py:start():188] Started disk monitoring
+2024-07-23 15:34:02,639 INFO    SystemMonitor:23818 [interfaces.py:start():188] Started gpu monitoring
+2024-07-23 15:34:02,641 INFO    SystemMonitor:23818 [interfaces.py:start():188] Started memory monitoring
+2024-07-23 15:34:02,642 INFO    SystemMonitor:23818 [interfaces.py:start():188] Started network monitoring
+2024-07-23 15:34:02,661 DEBUG   HandlerThread:23818 [system_info.py:probe():152] Probing system
+2024-07-23 15:34:02,668 DEBUG   HandlerThread:23818 [gitlib.py:_init_repo():56] git repository is invalid
+2024-07-23 15:34:02,668 DEBUG   HandlerThread:23818 [system_info.py:probe():200] Probing system done
+2024-07-23 15:34:02,668 DEBUG   HandlerThread:23818 [system_monitor.py:probe():223] {'os': 'Linux-6.8.0-38-generic-x86_64-with-glibc2.39', 'python': '3.9.19', 'heartbeatAt': '2024-07-23T13:34:02.661249', 'startedAt': '2024-07-23T13:34:02.542560', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/pedro/PycharmProjects/Rubricnet/rubricnet/interpretability.py', 'codePathLocal': 'interpretability.py', 'codePath': 'interpretability.py', 'host': 'pedro-17U70Q-P-AA78B', 'username': 'pedro', 'executable': '/home/pedro/miniconda3/envs/RAGrove/bin/python', 'cpu_count': 12, 'cpu_count_logical': 16, 'cpu_freq': {'current': 817.2714375, 'min': 400.0, 'max': 4050.0}, 'cpu_freq_per_core': [{'current': 537.976, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 996.321, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 1773.348, 'min': 400.0, 'max': 3400.0}, {'current': 1599.815, 'min': 400.0, 'max': 3400.0}, {'current': 1779.515, 'min': 400.0, 'max': 3400.0}, {'current': 1713.068, 'min': 400.0, 'max': 3400.0}, {'current': 1149.747, 'min': 400.0, 'max': 3400.0}, {'current': 400.0, 'min': 400.0, 'max': 3400.0}, {'current': 731.888, 'min': 400.0, 'max': 3400.0}, {'current': 816.089, 'min': 400.0, 'max': 3400.0}], 'disk': {'/': {'total': 936.7875633239746, 'used': 398.44215393066406}}, 'gpu': 'NVIDIA GeForce RTX 3050 Ti Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3050 Ti Laptop GPU', 'memory_total': 4294967296}], 'memory': {'total': 15.363292694091797}}
+2024-07-23 15:34:02,668 INFO    HandlerThread:23818 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-23 15:34:02,668 INFO    HandlerThread:23818 [system_monitor.py:probe():227] Publishing system info
+2024-07-23 15:34:02,668 DEBUG   HandlerThread:23818 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment

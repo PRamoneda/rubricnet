@@ -1,0 +1,13 @@
+lightning==2.2.4
+matplotlib==3.8.4
+pandas==2.2.2
+plotly
+python-dateutil==2.9.0.post0
+pytorch-lightning==2.2.4
+scikit-learn==1.4.2
+scipy==1.13.0
+torch==2.3.0
+torchmetrics==1.4.0
+torchvision==0.18.0
+wandb==0.17.0
+
