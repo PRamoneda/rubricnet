@@ -472,10 +472,10 @@ def main(columns, alias_experiment, dataset="cipi"):
         #     descriptor_scores = [((dd+1)/2).tolist() for dd in descriptor_scores]
 
 
-        # plot_regression_outputs_by_grade_green((pred_test+1).tolist(), regression_test.tolist())
-        # boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
-        # display_table_with_intervals(boundaries, split)
-        # plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
+        plot_regression_outputs_by_grade_green((pred_test+1).tolist(), regression_test.tolist())
+        boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
+        display_table_with_intervals(boundaries, split)
+        plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
         # generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
 
         acc9 = balanced_accuracy_score(y_true=y_test, y_pred=pred_test)
@@ -521,7 +521,6 @@ def parse_args():
 
 
 FEATURES = "basic"
-
 if __name__ == '__main__':
     args = parse_args()
     columns = minimal_columns_total
