@@ -368,7 +368,7 @@ def make_boundaries_from_roots(roots, increasing: bool = True):
         boundaries[0]=(0, (roots[1].item()+12)/2)
         for i in range(1,len(roots)-1):
              boundaries[i]=((roots[i].item()+12)/2, (roots[i+1].item()+12)/2)
-        boundaries[8]=((roots[-1].item()+12)/2, 12)
+        boundaries[len(boundaries.keys())]=((roots[-1].item()+12)/2, 12)
     else:
         if roots[-1] > roots[-2]:
             roots.pop()
