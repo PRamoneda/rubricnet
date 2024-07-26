@@ -506,6 +506,97 @@ def plot_boundaries(final_boundaries):
     plt.show()
 
 
+def get_contributions(pred_test, pred_scores, s:int = 0,features=None):
+    contributions = [{k: np.array([]) for k in features} for g in range(9)] 
+    sum_score_by_grades = [np.array([]) for _ in range(9)]
+    normalized_contrib = [{k: np.array([]) for k in features} for g in range(9)]
+    for i in range(len(pred_test)):
+        if s in [1, 2, 4]:
+            scores = [pred_scores[f][i] + 1 for f in range(len(features))]
+        else:
+            scores = [1 - pred_scores[f][i] for f in range(len(features))]
+        g = pred_test[i]
+        for f, name in enumerate(features):
+            contributions[g][name] = np.append(contributions[g][name],scores[f])
+        sum_score = np.sum(np.abs(scores))
+        sum_score_by_grades[g] = np.append(sum_score_by_grades[g],sum_score)
+        # get normalized contributions
+        for f, name in enumerate(features):
+            norm = scores[f] / 24
+            normalized_contrib[g][name] = np.append(normalized_contrib[g][name], norm)
+    # average contributions
+    avg_norm_contrib = [{k: 0.0 for k in features} for _ in range(9)]
+    diff_norm_contrib = [{k: 0.0 for k in features} for _ in range(9)]
+    for g in range(9):
+        for f, name in enumerate(features):
+            avg_norm_contrib[g][name] = normalized_contrib[g][name].mean()
+            if g == 0:
+                pass
+            else:
+                diff_norm_contrib[g][name] = (avg_norm_contrib[g][name] - avg_norm_contrib[0][name])
+    return avg_norm_contrib, diff_norm_contrib
+
+def plot_contrib(contrib, split:int=0,feat=None):
+    cmap = get_cmap('Greens')
+    COLORS = cmap(np.linspace(0.3, 0.9, 6))  # Adjusted color range for better visibility
+    STROKES = ['', '/']
+    
+    y_labels = ["P. Entropy (R)", "P. Entropy (L)",
+                "P. Range (R)", "P. Range (L)",
+               "Avg P. (R)", "Avg P. (L)",
+               "Avg IOI (R)", "Avg IOI (L)",
+               "Disp. Rate (R)", "Disp. Rate (L)",
+               "P. Set LZ (R)", "P. Set LZ (L)"]
+    fig, ax = plt.subplots(figsize=(6,4))
+    # Plot stacked bars
+    for g in range(9):
+        step = 12
+        bottom = 0
+        for f,name in enumerate(feat[::-1]):
+            val = contrib[g][name]
+            ax.bar(g, val, 0.5, label=name, bottom=bottom, color=COLORS[f//2%6], hatch=STROKES[f%2],edgecolor='black')
+            bottom += 1/step
+    # draw horizontal lines
+    ax.hlines(np.arange(0,12,1)/step,-1,9, color='black',linewidth=0.5)
+    plt.yticks(np.arange(0,12,1)/step,y_labels[::-1])
+    # fix legend
+    handles, labels = ax.get_legend_handles_labels()
+    handle_list, label_list = [], []
+    for handle, label in zip(handles, labels):
+        if label not in label_list:
+            handle_list.append(handle)
+            label_list.append(label)
+    # show zero line
+    #ax.legend(handle_list, label_list,ncol=2,loc='upper left',)
+            #bbox_to_anchor=(0,0.9))
+    plt.xticks(np.arange(0, 9, 1.0),np.arange(1, 10, 1))
+    # Eliminate upper and right axes
+    ax.spines['right'].set_color('none')
+    ax.spines['top'].set_color('none')
+    ax.set_xlabel("Grade")
+    ax.set_ylabel("")
+    plt.ylim(0,12/step)
+    plt.xlim(-0.5,8.5)
+    plt.tight_layout()
+    #plt.savefig(f'figs/contribution_{s}.pdf',transparent=False)
+    return ax, fig
+
+def plot_avg(contribs, features_selected=minimal_columns_total):
+    contrib = [{k: np.array([]) for k in features_selected} for g in range(9)]
+    for g in range(9):
+        for f, name in enumerate(features_selected):
+            avg = 0
+            count = 0
+            for s in range(5):
+                val = contribs[s][g][name]
+                if not(np.isnan(val)):
+                    avg += val
+                    count += 1
+            avg = avg / count
+            contrib[g][name] = avg
+    ax, fig =plot_contrib(contrib, 'all', feat=features_selected)
+    return ax, fig
+
 def main(columns, alias_experiment, dataset="cipi"):
     if dataset == "cipi":
         data = utils.load_json("cipi_splits.json")
