@@ -360,26 +360,51 @@ def generate_local_explainability(descriptor_scores, descriptors, split, ids_tes
     plot_explorer(ground_truth_grades, prediction_grades, ids_test, new_descriptor_scores, columns, split)
 
 
-def calculate_class_boundaries(grades, regression_values):
+def make_boundaries_from_roots(roots, increasing: bool = True):
+    boundaries = {}
+    if increasing:
+        if roots[-1] < roots[-2]:
+            roots.pop()
+        boundaries[0]=(0, (roots[1].item()+12)/2)
+        for i in range(1,len(roots)-1):
+             boundaries[i]=((roots[i].item()+12)/2, (roots[i+1].item()+12)/2)
+        boundaries[8]=((roots[-1].item()+12)/2, 12)
+    else:
+        if roots[-1] > roots[-2]:
+            roots.pop()
+        roots = [-r for r in roots]
+        boundaries = make_boundaries_from_roots(roots, True)
+    return boundaries
+
+
+
+def calculate_class_boundaries(grades, clf,
+        min_val: int = -12, max_val: int = 12):
     """
-    Calculates the lower and upper boundaries for each grade based on regression values.
+    Calculates the lower and upper boundaries for each grade based on the current classifier.
 
     Parameters:
     - grades: A list of integer grades.
-    - regression_values: A list of regression output values corresponding to each grade.
+    - clf: The classifier to use.
+    - min_val: lowest value possible for regression values. Default is -12.
+    - max_val: highest value possible for regression values. Default is 12.
 
     Returns:
     A dictionary with grades as keys and (lower_boundary, upper_boundary) as values.
     """
-    grouped_data = defaultdict(list)
-    for grade, value in zip(grades, regression_values):
-        grouped_data[grade].append(value)
-
-    class_boundaries = {}
-    for grade, values in grouped_data.items():
-        lower_boundary, upper_boundary = np.percentile(values, [0, 100])
-        class_boundaries[grade] = (lower_boundary, upper_boundary)
-
+    # Get root value for each grade
+    roots = []
+    biases = clf.model.linear1.final_layer.bias
+    weights = clf.model.linear1.final_layer.weight
+    for g in grades:
+        roots.append((0-biases[g])/weights[g])
+    increasing = True
+    for i in range(2, len(roots)-1):
+        if roots[i] < roots[i-1]:
+            increasing = False
+            break
+    class_boundaries = make_boundaries_from_roots(roots, increasing)
+    class_boundaries = {k+1: v for k, v in class_boundaries.items()}
     return class_boundaries
 
 
