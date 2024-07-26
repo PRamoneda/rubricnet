@@ -610,6 +610,8 @@ def main(columns, alias_experiment, dataset="cipi"):
             features = {v["id"]: v for v in utils.load_json("../features/current_difficulties.json")}
 
     final_acc9, final_acc3, final_acc1, final_mse, final_best_selection = [], [], [], [], []
+    final_boundaries = []
+    contribs = []
 
     for split in range(5):
         ids_train = data[str(split)]['train'].keys()
@@ -648,10 +650,13 @@ def main(columns, alias_experiment, dataset="cipi"):
 
 
         plot_regression_outputs_by_grade_green((pred_test+1).tolist(), regression_test.tolist())
-        boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
+        boundaries = calculate_class_boundaries(torch.arange(0,9,1), clf)
+        final_boundaries.append(boundaries)
         display_table_with_intervals(boundaries, split)
         plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
         # generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        _, d_contrib = get_contributions(pred_test, descriptor_scores, split, minimal_columns_total)
+        contribs.append(d_contrib)
 
         acc9 = balanced_accuracy_score(y_true=y_test, y_pred=pred_test)
         nine2three = [0, 0, 0, 1, 1, 1, 2, 2, 2]
@@ -666,6 +671,11 @@ def main(columns, alias_experiment, dataset="cipi"):
         final_mse.append(mse)
         print("best result", best_acc_val, final_acc9)
 
+    plot_boundaries(final_boundaries)
+    ax, fig = plot_avg(contribs)
+    plt.show()
+    fig.savefig("contributions.pdf", bbox_inches='tight')
+    plt.close(fig)
     print(f"Experiment \t"
             f"{mean(final_acc9) * 100:0.2f}({stdev(final_acc9) * 100:0.2f})\t"
             f"{mean(final_acc3) * 100:0.2f}({stdev(final_acc3) * 100:0.2f})\t"
