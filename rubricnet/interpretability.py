@@ -6,6 +6,8 @@ from itertools import chain, combinations
 from statistics import mean, stdev
 from time import sleep
 
+import matplotlib.pyplot as plt
+from matplotlib.cm import get_cmap
 import numpy as np
 import pandas as pd
 import six
@@ -22,7 +24,7 @@ from tqdm import tqdm
 import wandb
 from optuna_bayesian_optimization import music21_features
 
-from rubricnet import RubricnetSklearn
+from rubricnet import RubricnetSklearn, _prediction2label
 
 import plotly.graph_objects as go
 import pandas as pd
