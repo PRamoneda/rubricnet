@@ -448,6 +448,63 @@ def display_table_with_intervals(data, split, save_path="local_explainability"):
     plt.close(fig)  # Close the plot to free memory
 
 
+def plot_boundaries(final_boundaries):
+    # Redefine the data in case the kernel was reset
+    columns = np.arange(1, 10)  # Grade numbers
+    splits = ["1", "2", "3", "4", "5"]
+    #splits.reverse()
+    plt.rcParams.update({'font.size':24})
+
+    boundaries = np.full((5, 18), np.nan)
+    for s in splits:
+        key = int(s)-1
+        for k, v in enumerate(final_boundaries[key].values()):
+            low, high = v
+            boundaries[key][k] = low
+            boundaries[key][k+9] = high
+
+    # Adjusting the visualization with larger text sizes and labels
+
+    fig, ax = plt.subplots(figsize=(14, 8))  # Increased figure size for better visibility
+
+    # Redefine initial settings with larger text sizes
+    y_base = np.linspace(0,0.8,num=len(splits))[::-1]
+    cmap = get_cmap('Greens')
+    colors = cmap(np.linspace(0.3, 0.9, len(columns)))  # Adjusted color range for better visibility
+    #colors = ['#a74e0f', '#a96222', '#ad7332', '#b4823f', '#bc914a', '#c89e53', '#d7aa5a', '#eab660', '#ffc064'][::-1]
+
+    # Apply larger text sizes
+    for i, split in enumerate(splits):
+        for j in range(9):  # Iterate through each grade
+            start_point = boundaries[i][j]
+            end_point = boundaries[i][j + 9]
+            width = end_point - start_point  # Width of the bar is the range of boundary values
+            print(start_point, end_point, width)
+
+            if not np.isnan(start_point) and not np.isnan(end_point):
+                ax.barh(y_base[i], width, left=start_point, height=0.12, color=colors[j], edgecolor='black')
+                mid_point = start_point + (width / 2)
+                if j <= 3:
+                    c = 'black'
+                else:
+                    c = 'white'
+                ax.text(mid_point, y_base[i], str(j + 1), ha='center', va='center', color=c)  # Increased font size
+
+    # Adjusting the plot aesthetics with larger labels
+    ax.set_yticks(y_base)
+    ax.set_yticklabels(splits
+                      )  # Increased font size for y-tick labels
+    #ax.set_xlabel(r'$S_\text{agg}$', fontsize=20)  # Increased font size for the x-axis label
+    #ax.set_ylabel('Split', fontsize=20)  # Increased font size for the x-axis label
+
+
+    # Hide the right and top spines
+    ax.spines[['right', 'top']].set_visible(False)
+    #ax.set_title('Sequential Placement of Grade Boundaries for Each Split', fontsize=16)  # Increased title font size
+    plt.tight_layout()
+    plt.savefig("boundaries_bars.pdf")
+    plt.show()
+
 
 def main(columns, alias_experiment, dataset="cipi"):
     if dataset == "cipi":
