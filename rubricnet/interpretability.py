@@ -361,17 +361,33 @@ def generate_local_explainability(descriptor_scores, descriptors, split, ids_tes
 
 
 def make_boundaries_from_roots(roots, increasing: bool = True):
+    """make_boundaries_from_roots.
+    Based on roots of the sigmoids of the output layer, determines the boundaries of each grade.
+    The term root is used improperly here because it designates x where s(x) = 0.5, so that 
+    the new grade is always active.
+
+    Args:
+        roots: list of roots for each sigmoid of the final output stage.
+        increasing (bool): Flag regarding the order of the scores for each grade.
+    Returns:
+        boundaries: [(lower, upper), ...] for each grade.
+    """
     boundaries = {}
     if increasing:
         if roots[-1] < roots[-2]:
+            # If final grade is missing, its root value breaks the order
             roots.pop()
+        # boundaries are shifted to always be in [0,12]
         boundaries[0]=(0, (roots[1].item()+12)/2)
         for i in range(1,len(roots)-1):
              boundaries[i]=((roots[i].item()+12)/2, (roots[i+1].item()+12)/2)
+        # Last one always go up to 12
         boundaries[len(boundaries.keys())]=((roots[-1].item()+12)/2, 12)
     else:
         if roots[-1] > roots[-2]:
+            # If final grade is missing, its root value breaks the order
             roots.pop()
+        # take opposite of roots to shift boundaries back to [0,12]
         roots = [-r for r in roots]
         boundaries = make_boundaries_from_roots(roots, True)
     return boundaries
@@ -399,6 +415,8 @@ def calculate_class_boundaries(grades, clf,
     for g in grades:
         roots.append((0-biases[g])/weights[g])
     increasing = True
+    # Check if roots are ordered increasingly.
+    # we skip first and last element that can be wrongly ordered.
     for i in range(2, len(roots)-1):
         if roots[i] < roots[i-1]:
             increasing = False
@@ -449,10 +467,8 @@ def display_table_with_intervals(data, split, save_path="local_explainability"):
 
 
 def plot_boundaries(final_boundaries):
-    # Redefine the data in case the kernel was reset
     columns = np.arange(1, 10)  # Grade numbers
     splits = ["1", "2", "3", "4", "5"]
-    #splits.reverse()
     plt.rcParams.update({'font.size':24})
 
     boundaries = np.full((5, 18), np.nan)
