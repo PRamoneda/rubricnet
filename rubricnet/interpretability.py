@@ -6,6 +6,8 @@ from itertools import chain, combinations
 from statistics import mean, stdev
 from time import sleep
 
+import matplotlib.pyplot as plt
+from matplotlib.cm import get_cmap
 import numpy as np
 import pandas as pd
 import six
@@ -22,7 +24,7 @@ from tqdm import tqdm
 import wandb
 from optuna_bayesian_optimization import music21_features
 
-from rubricnet import RubricnetSklearn
+from rubricnet import RubricnetSklearn, _prediction2label
 
 import plotly.graph_objects as go
 import pandas as pd
@@ -273,8 +275,7 @@ def create_and_save_table(descriptor_scores, split, name, columns, descriptors, 
 def plot_explorer(ground_truth_grades, prediction_grades, ids, descriptors, columns, split):
     index = utils.load_json("index.json")
     new_columns = [
-        'Pitch Entropy (R)',
-        'Pitch Entropy (L)',
+        'Pitch Entropy (R)', 'Pitch Entropy (L)',
         'Pitch Range (R)', 'Pitch Range (L)',
         'Average Pitch (R)', 'Average Pitch (L)',
         'Average IOI (R)', 'Average IOI (L)',
@@ -346,10 +347,10 @@ def generate_local_explainability(descriptor_scores, descriptors, split, ids_tes
     # Loop through each sample and its descriptor scores to generate and save tables
     new_descriptor_scores = []
     for idx in range(len(descriptor_scores[0])):
-        new_descriptor_scores.append([dd[idx].tolist() for dd in descriptor_scores])
+        new_descriptor_scores.append([dd[idx] for dd in descriptor_scores])
     # Calculate mean score level for each ground_truth_grades
     mean_score_level = {grade - 1: [
-        mean([descriptor_scores[jdx][idx].tolist() for idx in [idx for idx in range(len(descriptor_scores[0])) if grade == ground_truth_grades[idx]]])
+        mean([descriptor_scores[jdx][idx] for idx in [idx for idx in range(len(descriptor_scores[0])) if grade == ground_truth_grades[idx]]])
         for jdx in range(12)
         ] for grade in set(ground_truth_grades)
     }
@@ -359,26 +360,69 @@ def generate_local_explainability(descriptor_scores, descriptors, split, ids_tes
     plot_explorer(ground_truth_grades, prediction_grades, ids_test, new_descriptor_scores, columns, split)
 
 
-def calculate_class_boundaries(grades, regression_values):
+def make_boundaries_from_roots(roots, increasing: bool = True):
+    """make_boundaries_from_roots.
+    Based on roots of the sigmoids of the output layer, determines the boundaries of each grade.
+    The term root is used improperly here because it designates x where s(x) = 0.5, so that
+    the new grade is always active.
+
+    Args:
+        roots: list of roots for each sigmoid of the final output stage.
+        increasing (bool): Flag regarding the order of the scores for each grade.
+    Returns:
+        boundaries: [(lower, upper), ...] for each grade.
     """
-    Calculates the lower and upper boundaries for each grade based on regression values.
+    boundaries = {}
+    if increasing:
+        if roots[-1] < roots[-2]:
+            # If final grade is missing, its root value breaks the order
+            roots.pop()
+        # boundaries are shifted to always be in [0,12]
+        boundaries[0]=(0, (roots[1].item()+12)/2)
+        for i in range(1,len(roots)-1):
+             boundaries[i]=((roots[i].item()+12)/2, (roots[i+1].item()+12)/2)
+        # Last one always go up to 12
+        boundaries[len(boundaries.keys())]=((roots[-1].item()+12)/2, 12)
+    else:
+        if roots[-1] > roots[-2]:
+            # If final grade is missing, its root value breaks the order
+            roots.pop()
+        # take opposite of roots to shift boundaries back to [0,12]
+        roots = [-r for r in roots]
+        boundaries = make_boundaries_from_roots(roots, True)
+    return boundaries
+
+
+
+def calculate_class_boundaries(grades, clf,
+        min_val: int = -12, max_val: int = 12):
+    """
+    Calculates the lower and upper boundaries for each grade based on the current classifier.
 
     Parameters:
     - grades: A list of integer grades.
-    - regression_values: A list of regression output values corresponding to each grade.
+    - clf: The classifier to use.
+    - min_val: lowest value possible for regression values. Default is -12.
+    - max_val: highest value possible for regression values. Default is 12.
 
     Returns:
     A dictionary with grades as keys and (lower_boundary, upper_boundary) as values.
     """
-    grouped_data = defaultdict(list)
-    for grade, value in zip(grades, regression_values):
-        grouped_data[grade].append(value)
-
-    class_boundaries = {}
-    for grade, values in grouped_data.items():
-        lower_boundary, upper_boundary = np.percentile(values, [0, 100])
-        class_boundaries[grade] = (lower_boundary, upper_boundary)
-
+    # Get root value for each grade
+    roots = []
+    biases = clf.model.linear1.final_layer.bias
+    weights = clf.model.linear1.final_layer.weight
+    for g in grades:
+        roots.append((0-biases[g])/weights[g])
+    increasing = True
+    # Check if roots are ordered increasingly.
+    # we skip first and last element that can be wrongly ordered.
+    for i in range(2, len(roots)-1):
+        if roots[i] < roots[i-1]:
+            increasing = False
+            break
+    class_boundaries = make_boundaries_from_roots(roots, increasing)
+    class_boundaries = {k+1: v for k, v in class_boundaries.items()}
     return class_boundaries
 
 
@@ -422,6 +466,152 @@ def display_table_with_intervals(data, split, save_path="local_explainability"):
     plt.close(fig)  # Close the plot to free memory
 
 
+def plot_boundaries(final_boundaries):
+    columns = np.arange(1, 10)  # Grade numbers
+    splits = ["1", "2", "3", "4", "5"]
+    plt.rcParams.update({'font.size':24})
+
+    boundaries = np.full((5, 18), np.nan)
+    for s in splits:
+        key = int(s)-1
+        for k, v in enumerate(final_boundaries[key].values()):
+            low, high = v
+            boundaries[key][k] = low
+            boundaries[key][k+9] = high
+
+    # Adjusting the visualization with larger text sizes and labels
+
+    fig, ax = plt.subplots(figsize=(14, 8))  # Increased figure size for better visibility
+
+    # Redefine initial settings with larger text sizes
+    y_base = np.linspace(0,0.8,num=len(splits))[::-1]
+    cmap = get_cmap('Greens')
+    colors = cmap(np.linspace(0.3, 0.9, len(columns)))  # Adjusted color range for better visibility
+    #colors = ['#a74e0f', '#a96222', '#ad7332', '#b4823f', '#bc914a', '#c89e53', '#d7aa5a', '#eab660', '#ffc064'][::-1]
+
+    # Apply larger text sizes
+    for i, split in enumerate(splits):
+        for j in range(9):  # Iterate through each grade
+            start_point = boundaries[i][j]
+            end_point = boundaries[i][j + 9]
+            width = end_point - start_point  # Width of the bar is the range of boundary values
+            print(start_point, end_point, width)
+
+            if not np.isnan(start_point) and not np.isnan(end_point):
+                ax.barh(y_base[i], width, left=start_point, height=0.12, color=colors[j], edgecolor='black')
+                mid_point = start_point + (width / 2)
+                if j <= 3:
+                    c = 'black'
+                else:
+                    c = 'white'
+                ax.text(mid_point, y_base[i], str(j + 1), ha='center', va='center', color=c)  # Increased font size
+
+    # Adjusting the plot aesthetics with larger labels
+    ax.set_yticks(y_base)
+    ax.set_yticklabels(splits
+                      )  # Increased font size for y-tick labels
+    #ax.set_xlabel(r'$S_\text{agg}$', fontsize=20)  # Increased font size for the x-axis label
+    #ax.set_ylabel('Split', fontsize=20)  # Increased font size for the x-axis label
+
+
+    # Hide the right and top spines
+    ax.spines[['right', 'top']].set_visible(False)
+    #ax.set_title('Sequential Placement of Grade Boundaries for Each Split', fontsize=16)  # Increased title font size
+    plt.tight_layout()
+    plt.savefig("boundaries_bars.pdf")
+    plt.show()
+
+
+def get_contributions(pred_test, pred_scores, s:int = 0,features=None):
+    contributions = [{k: np.array([]) for k in features} for g in range(9)]
+    sum_score_by_grades = [np.array([]) for _ in range(9)]
+    normalized_contrib = [{k: np.array([]) for k in features} for g in range(9)]
+    for i in range(len(pred_test)):
+        if s in [1, 2, 4]:
+            scores = [pred_scores[f][i] + 1 for f in range(len(features))]
+        else:
+            scores = [1 - pred_scores[f][i] for f in range(len(features))]
+        g = pred_test[i]
+        for f, name in enumerate(features):
+            contributions[g][name] = np.append(contributions[g][name],scores[f])
+        sum_score = np.sum(np.abs(scores))
+        sum_score_by_grades[g] = np.append(sum_score_by_grades[g],sum_score)
+        # get normalized contributions
+        for f, name in enumerate(features):
+            norm = scores[f] / 24
+            normalized_contrib[g][name] = np.append(normalized_contrib[g][name], norm)
+    # average contributions
+    avg_norm_contrib = [{k: 0.0 for k in features} for _ in range(9)]
+    diff_norm_contrib = [{k: 0.0 for k in features} for _ in range(9)]
+    for g in range(9):
+        for f, name in enumerate(features):
+            avg_norm_contrib[g][name] = normalized_contrib[g][name].mean()
+            if g == 0:
+                pass
+            else:
+                diff_norm_contrib[g][name] = (avg_norm_contrib[g][name] - avg_norm_contrib[0][name])
+    return avg_norm_contrib, diff_norm_contrib
+
+def plot_contrib(contrib, split:int=0,feat=None):
+    cmap = get_cmap('Greens')
+    COLORS = cmap(np.linspace(0.3, 0.9, 6))  # Adjusted color range for better visibility
+    STROKES = ['', '/']
+
+    y_labels = ["P. Entropy (R)", "P. Entropy (L)",
+                "P. Range (R)", "P. Range (L)",
+               "Avg P. (R)", "Avg P. (L)",
+               "Avg IOI (R)", "Avg IOI (L)",
+               "Disp. Rate (R)", "Disp. Rate (L)",
+               "P. Set LZ (R)", "P. Set LZ (L)"]
+    fig, ax = plt.subplots(figsize=(6,4))
+    # Plot stacked bars
+    for g in range(9):
+        step = 12
+        bottom = 0
+        for f,name in enumerate(feat[::-1]):
+            val = contrib[g][name]
+            ax.bar(g, val, 0.5, label=name, bottom=bottom, color=COLORS[f//2%6], hatch=STROKES[f%2],edgecolor='black')
+            bottom += 1/step
+    # draw horizontal lines
+    ax.hlines(np.arange(0,12,1)/step,-1,9, color='black',linewidth=0.5)
+    plt.yticks(np.arange(0,12,1)/step,y_labels[::-1])
+    # fix legend
+    handles, labels = ax.get_legend_handles_labels()
+    handle_list, label_list = [], []
+    for handle, label in zip(handles, labels):
+        if label not in label_list:
+            handle_list.append(handle)
+            label_list.append(label)
+    # show zero line
+    #ax.legend(handle_list, label_list,ncol=2,loc='upper left',)
+            #bbox_to_anchor=(0,0.9))
+    plt.xticks(np.arange(0, 9, 1.0),np.arange(1, 10, 1))
+    # Eliminate upper and right axes
+    ax.spines['right'].set_color('none')
+    ax.spines['top'].set_color('none')
+    ax.set_xlabel("Grade")
+    ax.set_ylabel("")
+    plt.ylim(0,12/step)
+    plt.xlim(-0.5,8.5)
+    plt.tight_layout()
+    #plt.savefig(f'figs/contribution_{s}.pdf',transparent=False)
+    return ax, fig
+
+def plot_avg(contribs, features_selected=minimal_columns_total):
+    contrib = [{k: np.array([]) for k in features_selected} for g in range(9)]
+    for g in range(9):
+        for f, name in enumerate(features_selected):
+            avg = 0
+            count = 0
+            for s in range(5):
+                val = contribs[s][g][name]
+                if not(np.isnan(val)):
+                    avg += val
+                    count += 1
+            avg = avg / count
+            contrib[g][name] = avg
+    ax, fig =plot_contrib(contrib, 'all', feat=features_selected)
+    return ax, fig
 
 def main(columns, alias_experiment, dataset="cipi"):
     if dataset == "cipi":
@@ -436,6 +626,8 @@ def main(columns, alias_experiment, dataset="cipi"):
             features = {v["id"]: v for v in utils.load_json("../features/current_difficulties.json")}
 
     final_acc9, final_acc3, final_acc1, final_mse, final_best_selection = [], [], [], [], []
+    final_boundaries = []
+    contribs = []
 
     for split in range(5):
         ids_train = data[str(split)]['train'].keys()
@@ -478,6 +670,13 @@ def main(columns, alias_experiment, dataset="cipi"):
         #display_table_with_intervals(boundaries, split)
         #plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
         #generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        boundaries = calculate_class_boundaries(torch.arange(0,9,1), clf)
+        final_boundaries.append(boundaries)
+        display_table_with_intervals(boundaries, split)
+        plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
+        # generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        _, d_contrib = get_contributions(pred_test, descriptor_scores, split, minimal_columns_total)
+        contribs.append(d_contrib)
 
         acc9 = balanced_accuracy_score(y_true=y_test, y_pred=pred_test)
         nine2three = [0, 0, 0, 1, 1, 1, 2, 2, 2]
@@ -492,6 +691,11 @@ def main(columns, alias_experiment, dataset="cipi"):
         final_mse.append(mse)
         print("best result", best_acc_val, final_acc9)
 
+    plot_boundaries(final_boundaries)
+    ax, fig = plot_avg(contribs)
+    plt.show()
+    fig.savefig("contributions.pdf", bbox_inches='tight')
+    plt.close(fig)
     print(f"Experiment \t"
             f"{mean(final_acc9) * 100:0.2f}({stdev(final_acc9) * 100:0.2f})\t"
             f"{mean(final_acc3) * 100:0.2f}({stdev(final_acc3) * 100:0.2f})\t"
