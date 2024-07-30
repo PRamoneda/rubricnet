@@ -1,0 +1,53 @@
+2024-07-29 11:04:46,697 INFO    StreamThr :68166 [internal.py:wandb_internal():85] W&B internal server running at pid: 68166, started at: 2024-07-29 11:04:46.695540
+2024-07-29 11:04:46,703 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status
+2024-07-29 11:04:46,723 INFO    WriterThread:68166 [datastore.py:open_for_write():87] open: ./wandb/offline-run-20240729_110446-gv2449fr/run-gv2449fr.wandb
+2024-07-29 11:04:46,837 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: run_start
+2024-07-29 11:04:46,854 DEBUG   HandlerThread:68166 [system_info.py:__init__():26] System info init
+2024-07-29 11:04:46,855 DEBUG   HandlerThread:68166 [system_info.py:__init__():41] System info init done
+2024-07-29 11:04:46,855 INFO    HandlerThread:68166 [system_monitor.py:start():194] Starting system monitor
+2024-07-29 11:04:46,856 INFO    SystemMonitor:68166 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-07-29 11:04:46,858 INFO    HandlerThread:68166 [system_monitor.py:probe():214] Collecting system info
+2024-07-29 11:04:46,859 INFO    SystemMonitor:68166 [interfaces.py:start():188] Started cpu monitoring
+2024-07-29 11:04:46,861 INFO    SystemMonitor:68166 [interfaces.py:start():188] Started disk monitoring
+2024-07-29 11:04:46,865 INFO    SystemMonitor:68166 [interfaces.py:start():188] Started gpu monitoring
+2024-07-29 11:04:46,868 INFO    SystemMonitor:68166 [interfaces.py:start():188] Started memory monitoring
+2024-07-29 11:04:46,871 INFO    SystemMonitor:68166 [interfaces.py:start():188] Started network monitoring
+2024-07-29 11:04:46,904 DEBUG   HandlerThread:68166 [system_info.py:probe():152] Probing system
+2024-07-29 11:04:46,916 DEBUG   HandlerThread:68166 [system_info.py:_probe_git():137] Probing git
+2024-07-29 11:04:46,940 DEBUG   HandlerThread:68166 [system_info.py:_probe_git():145] Probing git done
+2024-07-29 11:04:46,941 DEBUG   HandlerThread:68166 [system_info.py:probe():200] Probing system done
+2024-07-29 11:04:46,941 DEBUG   HandlerThread:68166 [system_monitor.py:probe():223] {'os': 'Linux-6.8.0-38-generic-x86_64-with-glibc2.39', 'python': '3.9.19', 'heartbeatAt': '2024-07-29T09:04:46.904591', 'startedAt': '2024-07-29T09:04:46.662659', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/pedro/PycharmProjects/Rubricnet/rubricnet/interpretability.py', 'codePathLocal': 'interpretability.py', 'codePath': 'rubricnet/interpretability.py', 'git': {'remote': 'https://github.com/PRamoneda/cr_rubricnet.git', 'commit': '1559ff8459c633cdeb4e6e7492ea6640aed16c88'}, 'email': 'PRamoneda@github.com', 'root': '/home/pedro/PycharmProjects/Rubricnet', 'host': 'pedro-17U70Q-P-AA78B', 'username': 'pedro', 'executable': '/home/pedro/miniconda3/envs/RAGrove/bin/python', 'cpu_count': 12, 'cpu_count_logical': 16, 'cpu_freq': {'current': 1245.61675, 'min': 400.0, 'max': 4050.0}, 'cpu_freq_per_core': [{'current': 543.229, 'min': 400.0, 'max': 4700.0}, {'current': 694.292, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 1599.11, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 400.0, 'min': 400.0, 'max': 4700.0}, {'current': 1558.352, 'min': 400.0, 'max': 3400.0}, {'current': 553.652, 'min': 400.0, 'max': 3400.0}, {'current': 1833.243, 'min': 400.0, 'max': 3400.0}, {'current': 1429.114, 'min': 400.0, 'max': 3400.0}, {'current': 1699.663, 'min': 400.0, 'max': 3400.0}, {'current': 1598.737, 'min': 400.0, 'max': 3400.0}, {'current': 400.0, 'min': 400.0, 'max': 3400.0}, {'current': 2000.055, 'min': 400.0, 'max': 3400.0}], 'disk': {'/': {'total': 936.7875633239746, 'used': 422.12657165527344}}, 'gpu': 'NVIDIA GeForce RTX 3050 Ti Laptop GPU', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 3050 Ti Laptop GPU', 'memory_total': 4294967296}], 'memory': {'total': 15.363300323486328}}
+2024-07-29 11:04:46,941 INFO    HandlerThread:68166 [system_monitor.py:probe():224] Finished collecting system info
+2024-07-29 11:04:46,941 INFO    HandlerThread:68166 [system_monitor.py:probe():227] Publishing system info
+2024-07-29 11:04:46,941 DEBUG   HandlerThread:68166 [system_info.py:_save_conda():209] Saving list of conda packages installed into the current environment
+2024-07-29 11:04:53,791 DEBUG   HandlerThread:68166 [system_info.py:_save_conda():224] Saving conda packages done
+2024-07-29 11:04:53,811 INFO    HandlerThread:68166 [system_monitor.py:probe():229] Finished publishing system info
+2024-07-29 11:04:53,817 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:04:53,817 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: keepalive
+2024-07-29 11:04:53,818 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:04:54,270 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: python_packages
+2024-07-29 11:04:56,820 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:04:56,821 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:01,824 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:01,826 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:06,829 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:06,830 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:11,833 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:11,835 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:16,838 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:16,839 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:21,842 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:21,844 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:26,847 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:26,849 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:31,852 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:31,853 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:36,856 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:36,857 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:41,859 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:41,860 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:46,863 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:46,864 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report
+2024-07-29 11:05:46,871 DEBUG   SystemMonitor:68166 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-07-29 11:05:51,867 DEBUG   HandlerThread:68166 [handler.py:handle_request():158] handle_request: status_report
+2024-07-29 11:05:51,868 DEBUG   SenderThread:68166 [sender.py:send_request():406] send_request: status_report

@@ -273,7 +273,8 @@ def create_and_save_table(descriptor_scores, split, name, columns, descriptors, 
 def plot_explorer(ground_truth_grades, prediction_grades, ids, descriptors, columns, split):
     index = utils.load_json("index.json")
     new_columns = [
-        'Pitch Entropy (R)', 'Pitch Entropy (L)',
+        'Pitch Entropy (R)',
+        'Pitch Entropy (L)',
         'Pitch Range (R)', 'Pitch Range (L)',
         'Average Pitch (R)', 'Average Pitch (L)',
         'Average IOI (R)', 'Average IOI (L)',
@@ -345,10 +346,10 @@ def generate_local_explainability(descriptor_scores, descriptors, split, ids_tes
     # Loop through each sample and its descriptor scores to generate and save tables
     new_descriptor_scores = []
     for idx in range(len(descriptor_scores[0])):
-        new_descriptor_scores.append([dd[idx] for dd in descriptor_scores])
+        new_descriptor_scores.append([dd[idx].tolist() for dd in descriptor_scores])
     # Calculate mean score level for each ground_truth_grades
     mean_score_level = {grade - 1: [
-        mean([descriptor_scores[jdx][idx] for idx in [idx for idx in range(len(descriptor_scores[0])) if grade == ground_truth_grades[idx]]])
+        mean([descriptor_scores[jdx][idx].tolist() for idx in [idx for idx in range(len(descriptor_scores[0])) if grade == ground_truth_grades[idx]]])
         for jdx in range(12)
         ] for grade in set(ground_truth_grades)
     }
@@ -463,20 +464,20 @@ def main(columns, alias_experiment, dataset="cipi"):
         regression_test = clf.predict_regression(X_test_scaled)
         descriptor_scores = clf.predict_descriptor_scores(X_test_scaled)
 
-        # if split in [2, 3, 4]:
-        #     regression_test *= -1
-        #     regression_test = (regression_test + 12) / 12
-        #     descriptor_scores = [((((dd* -1)+1)/2)).tolist() for dd in descriptor_scores]
-        # else:
-        #     regression_test = (regression_test + 12) / 12
-        #     descriptor_scores = [((dd+1)/2).tolist() for dd in descriptor_scores]
+        if split in [0, 3]:
+             regression_test *= -1
+             regression_test = (regression_test + 12) / 12
+             descriptor_scores = [((((dd* -1)+1)/2)).tolist() for dd in descriptor_scores]
+        else:
+             regression_test = (regression_test + 12) / 12
+             descriptor_scores = [((dd+1)/2).tolist() for dd in descriptor_scores]
 
 
         plot_regression_outputs_by_grade_green((pred_test+1).tolist(), regression_test.tolist())
-        boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
-        display_table_with_intervals(boundaries, split)
-        plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
-        # generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        #boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
+        #display_table_with_intervals(boundaries, split)
+        #plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
+        #generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
 
         acc9 = balanced_accuracy_score(y_true=y_test, y_pred=pred_test)
         nine2three = [0, 0, 0, 1, 1, 1, 2, 2, 2]

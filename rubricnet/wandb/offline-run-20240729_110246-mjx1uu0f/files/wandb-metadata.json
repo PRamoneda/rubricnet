@@ -1,0 +1,128 @@
+{
+    "os": "Linux-6.8.0-38-generic-x86_64-with-glibc2.39",
+    "python": "3.9.19",
+    "heartbeatAt": "2024-07-29T09:02:47.102986",
+    "startedAt": "2024-07-29T09:02:46.942576",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/pedro/PycharmProjects/Rubricnet/rubricnet/interpretability.py",
+    "codePathLocal": "interpretability.py",
+    "codePath": "rubricnet/interpretability.py",
+    "git": {
+        "remote": "https://github.com/PRamoneda/cr_rubricnet.git",
+        "commit": "1559ff8459c633cdeb4e6e7492ea6640aed16c88"
+    },
+    "email": "PRamoneda@github.com",
+    "root": "/home/pedro/PycharmProjects/Rubricnet",
+    "host": "pedro-17U70Q-P-AA78B",
+    "username": "pedro",
+    "executable": "/home/pedro/miniconda3/envs/RAGrove/bin/python",
+    "cpu_count": 12,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1115.711375,
+        "min": 400.0,
+        "max": 4050.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1499.733,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1499.984,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 414.978,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 530.386,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 398.646,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1017.466,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1500.185,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1198.618,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1503.097,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1155.108,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1500.049,
+            "min": 400.0,
+            "max": 3400.0
+        },
+        {
+            "current": 1500.354,
+            "min": 400.0,
+            "max": 3400.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 936.7875633239746,
+            "used": 422.12682723999023
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 15.363300323486328
+    }
+}

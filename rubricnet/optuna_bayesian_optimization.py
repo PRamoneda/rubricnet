@@ -44,24 +44,38 @@ def get_mse_macro(y_true, y_pred):
 
 
 minimal_columns_chiu = [
- 'rh_pitch_entropy', # if the distribution of the pitches close to uniform
- 'lh_pitch_entropy',
- 'rh_pitch_range', # trivial
- 'lh_pitch_range',
- 'rh_average_pitch', # trivial
- 'lh_average_pitch',
- 'rh_average_ioi_seconds', # bpm is not very defined
- 'lh_average_ioi_seconds',
- 'rh_displacement_rate', #
- 'lh_displacement_rate'
+    'rh_pitch_range',
+    'lh_pitch_range',
+    'lh_average_pitch',
+    'rh_average_pitch',
+    'lh_average_ioi_seconds',
+    'rh_average_ioi_seconds',
+    'rh_displacement_rate',
+    'lh_displacement_rate',
+    'lh_pitch_entropy',
+    'rh_pitch_entropy'
 ]
 
-basic_features = ['rh_pitch_set_lz',
+basic_features = [
+  'rh_pitch_set_lz',
   'lh_pitch_set_lz',
   'rh_pitch_range',
   'lh_pitch_range',
   'lh_average_pitch',
   'rh_average_pitch',
+  'lh_average_ioi_seconds',
+  'rh_average_ioi_seconds',
+  'rh_displacement_rate',
+  'lh_displacement_rate',
+  'lh_pitch_entropy',
+  'rh_pitch_entropy'
+]
+
+basic_features_no_pitch = [
+  'rh_pitch_set_lz',
+  'lh_pitch_set_lz',
+  'rh_pitch_range',
+  'lh_pitch_range',
   'lh_average_ioi_seconds',
   'rh_average_ioi_seconds',
   'rh_displacement_rate',
@@ -89,6 +103,8 @@ def main(trial):
         columns = basic_features
     elif FEATURES == "chiu":
         columns = minimal_columns_chiu
+    elif FEATURES == "no_pitch":
+        columns = basic_features_no_pitch
     else:
         raise ValueError("Invalid FEATURES")
     dataset = "cipi"
@@ -164,11 +180,10 @@ def main(trial):
     return mean(final_acc9_val), mean(final_mse_val)
 
 
-FEATURES = "basic"
-
+FEATURES = "chiu"
 
 if __name__ == '__main__':
-    alias_optuna = "basic"
+    alias_optuna = "test"
     sqlite_url = f'sqlite:///{alias_optuna}.db'
     study = optuna.create_study(study_name=alias_optuna, directions=['maximize', 'minimize'], storage=sqlite_url, load_if_exists=True, sampler=optuna.samplers.TPESampler(seed=2))
     study.optimize(main, n_trials=99, n_jobs=1)
@@ -178,3 +193,4 @@ if __name__ == '__main__':
     print('  Params: ')
     for key, value in trial.params.items():
         print(f'    {key}: {value}')
+

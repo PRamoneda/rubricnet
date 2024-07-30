@@ -1,0 +1,30 @@
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Configure stats pid to 37083
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Loading settings from /home/pedro/.config/wandb/settings
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Loading settings from /home/pedro/PycharmProjects/Rubricnet/rubricnet/wandb/settings
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'mode': 'offline'}
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'rubricnet/interpretability.py', 'program_abspath': '/home/pedro/PycharmProjects/Rubricnet/rubricnet/interpretability.py', 'program': '/home/pedro/PycharmProjects/Rubricnet/rubricnet/interpretability.py'}
+2024-07-23 17:11:17,032 INFO    MainThread:37083 [wandb_init.py:_log_setup():520] Logging user logs to ./wandb/offline-run-20240723_171117-9xpttdqc/logs/debug.log
+2024-07-23 17:11:17,033 INFO    MainThread:37083 [wandb_init.py:_log_setup():521] Logging internal logs to ./wandb/offline-run-20240723_171117-9xpttdqc/logs/debug-internal.log
+2024-07-23 17:11:17,033 INFO    MainThread:37083 [wandb_init.py:init():560] calling init triggers
+2024-07-23 17:11:17,033 INFO    MainThread:37083 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {}
+2024-07-23 17:11:17,033 INFO    MainThread:37083 [wandb_init.py:init():610] starting backend
+2024-07-23 17:11:17,033 INFO    MainThread:37083 [wandb_init.py:init():614] setting up manager
+2024-07-23 17:11:17,041 INFO    MainThread:37083 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-07-23 17:11:17,043 INFO    MainThread:37083 [wandb_init.py:init():622] backend started and connected
+2024-07-23 17:11:17,061 INFO    MainThread:37083 [wandb_init.py:init():711] updated telemetry
+2024-07-23 17:11:17,103 INFO    MainThread:37083 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-07-23 17:11:17,110 INFO    MainThread:37083 [wandb_init.py:init():795] starting run threads in backend
+2024-07-23 17:11:23,832 INFO    MainThread:37083 [wandb_run.py:_console_start():2380] atexit reg
+2024-07-23 17:11:23,832 INFO    MainThread:37083 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-07-23 17:11:23,832 INFO    MainThread:37083 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-07-23 17:11:23,832 INFO    MainThread:37083 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-07-23 17:11:23,833 INFO    MainThread:37083 [wandb_init.py:init():838] run started, returning control to user process
+2024-07-23 17:11:23,835 INFO    MainThread:37083 [wandb_run.py:_config_callback():1382] config_cb None None {'alias_experiment': 'rubricnet_cameraready', 'set_features': 'basic', 'batch_size': 40, 'patience': 400, 'lr': 0.1, 'hidden_size': 1, 'num_layers': 1, 'dropout': 0.1, 'decay_lr': 0.9, 'weight_decay': 0.01}
+2024-07-23 17:11:25,236 INFO    MainThread:37083 [wandb_run.py:_config_callback():1382] config_cb None None {'alias_experiment': 'rubricnet_cameraready', 'set_features': 'basic', 'batch_size': 40, 'patience': 400, 'lr': 0.1, 'hidden_size': 1, 'num_layers': 1, 'dropout': 0.1, 'decay_lr': 0.9, 'weight_decay': 0.01}
+2024-07-23 17:11:26,190 INFO    MainThread:37083 [wandb_run.py:_config_callback():1382] config_cb None None {'alias_experiment': 'rubricnet_cameraready', 'set_features': 'basic', 'batch_size': 40, 'patience': 400, 'lr': 0.1, 'hidden_size': 1, 'num_layers': 1, 'dropout': 0.1, 'decay_lr': 0.9, 'weight_decay': 0.01}
+2024-07-23 17:11:27,165 INFO    MainThread:37083 [wandb_run.py:_config_callback():1382] config_cb None None {'alias_experiment': 'rubricnet_cameraready', 'set_features': 'basic', 'batch_size': 40, 'patience': 400, 'lr': 0.1, 'hidden_size': 1, 'num_layers': 1, 'dropout': 0.1, 'decay_lr': 0.9, 'weight_decay': 0.01}
+2024-07-23 17:11:28,077 INFO    MainThread:37083 [wandb_run.py:_config_callback():1382] config_cb None None {'alias_experiment': 'rubricnet_cameraready', 'set_features': 'basic', 'batch_size': 40, 'patience': 400, 'lr': 0.1, 'hidden_size': 1, 'num_layers': 1, 'dropout': 0.1, 'decay_lr': 0.9, 'weight_decay': 0.01}
+2024-07-23 17:11:30,292 WARNING MsgRouterThr:37083 [router.py:message_loop():77] message_loop has been closed
