@@ -7,7 +7,7 @@ from statistics import mean, stdev
 from time import sleep
 
 import matplotlib.pyplot as plt
-from matplotlib.cm import get_cmap
+from matplotlib import cm
 import numpy as np
 import pandas as pd
 import six
@@ -95,8 +95,6 @@ def get_mse_macro(y_true, y_pred):
         tt, pp = zip(*[[tt, pp] for tt, pp in zip(y_true, y_pred) if tt == true_class])
         mse_each_class.append(mean_squared_error(y_true=tt, y_pred=pp))
     return mean(mse_each_class)
-
-
 
 
 
@@ -249,25 +247,46 @@ def render_table_with_darker_header_and_final(data, col_width=2.5, row_height=0.
 
 # Function to create table for given descriptor scores and save to specified path
 
-def create_and_save_table(descriptor_scores, split, name, columns, descriptors, mean_score_level, save_dir="local_explainability"):
+def create_and_save_table(descriptor_scores, split, name, columns, descriptors, mean_score_level,
+                          save_dir="local_explainability"):
     # Calculate accumulative score
     accumulative_score = 0
     # Generate table data
     table_data = []
+
     for idx, score in enumerate(descriptor_scores):
         feature_name = columns[idx].replace('rh_', '').replace('lh_', '').replace('_', ' ').title()
         hand = 'Right' if 'rh' in columns[idx] else 'Left'
         score_with_sign = f"+{round(score, 2)}" if score > 0 else round(score, 2)
         accumulative_score += score
-        table_data.append([feature_name, hand, round(descriptors[idx], 2), score_with_sign, round(score - mean_score_level[idx], 2), round(accumulative_score, 2)])
-        # Decrease for the next item
-    # Add the final score row
+        table_data.append(
+            [feature_name, hand, round(descriptors[idx], 2), score_with_sign, round(score - mean_score_level[idx], 2),
+             round(accumulative_score, 2)])
+
+    # Add the final score row before reordering
     table_data.append(['Final Score', '—', '—', '—', '—', round(sum(descriptor_scores), 2)])
+
+    # Reorder columns: right then left
+    reordered_columns = [
+        'rh_pitch_set_lz', 'lh_pitch_set_lz',
+        'rh_pitch_range', 'lh_pitch_range',
+        'rh_average_pitch', 'lh_average_pitch',
+        'rh_average_ioi_seconds', 'lh_average_ioi_seconds',
+        'rh_displacement_rate', 'lh_displacement_rate',
+        'rh_pitch_entropy', 'lh_pitch_entropy'
+    ]
+    reordered_indices = [columns.index(col) for col in reordered_columns]
+
+    reordered_table_data = [table_data[idx] for idx in reordered_indices]
+    reordered_table_data.append(table_data[-1])  # Append the final score row again after reordering
+
     # Create directories
     save_path = os.path.join(save_dir, str(split))
     os.makedirs(save_path, exist_ok=True)
+
     # Render and save the table
-    fig, ax = render_table_with_darker_header_and_final(table_data, col_width=2.0, row_height=0.5, font_size=8)
+    fig, ax = render_table_with_darker_header_and_final(reordered_table_data, col_width=2.0, row_height=0.5,
+                                                        font_size=8)
     fig.savefig(os.path.join(save_path, f"{name}_table.png"), bbox_inches='tight', dpi=300)
     plt.close(fig)  # Close the plot to free memory
 
@@ -341,7 +360,6 @@ def plot_explorer(ground_truth_grades, prediction_grades, ids, descriptors, colu
     # Save the plot
     fig.write_html(save_path)
     sleep(5)
-    # exit()
 
 def generate_local_explainability(descriptor_scores, descriptors, split, ids_test, columns, ground_truth_grades, prediction_grades):
     # Loop through each sample and its descriptor scores to generate and save tables
@@ -485,7 +503,7 @@ def plot_boundaries(final_boundaries):
 
     # Redefine initial settings with larger text sizes
     y_base = np.linspace(0,0.8,num=len(splits))[::-1]
-    cmap = get_cmap('Greens')
+    cmap = cm.get_cmap('Greens')
     colors = cmap(np.linspace(0.3, 0.9, len(columns)))  # Adjusted color range for better visibility
     #colors = ['#a74e0f', '#a96222', '#ad7332', '#b4823f', '#bc914a', '#c89e53', '#d7aa5a', '#eab660', '#ffc064'][::-1]
 
@@ -553,7 +571,7 @@ def get_contributions(pred_test, pred_scores, s:int = 0,features=None):
     return avg_norm_contrib, diff_norm_contrib
 
 def plot_contrib(contrib, split:int=0,feat=None):
-    cmap = get_cmap('Greens')
+    cmap = cm.get_cmap('Greens')
     COLORS = cmap(np.linspace(0.3, 0.9, 6))  # Adjusted color range for better visibility
     STROKES = ['', '/']
 
@@ -664,17 +682,14 @@ def main(columns, alias_experiment, dataset="cipi"):
              regression_test = (regression_test + 12) / 12
              descriptor_scores = [((dd+1)/2).tolist() for dd in descriptor_scores]
 
-
         plot_regression_outputs_by_grade_green((pred_test+1).tolist(), regression_test.tolist())
         #boundaries = calculate_class_boundaries((pred_test+1).tolist(), regression_test.tolist())
         #display_table_with_intervals(boundaries, split)
-        #plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
-        #generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
         boundaries = calculate_class_boundaries(torch.arange(0,9,1), clf)
         final_boundaries.append(boundaries)
         display_table_with_intervals(boundaries, split)
-        plot_descriptor_scores_vs_values(descriptor_scores, X_test_scaled, columns)
-        # generate_local_explainability(descriptor_scores,X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
+        generate_local_explainability(descriptor_scores, X_test, split, ids_test, columns, (y_test+1).tolist(), (pred_test+1).tolist())
         _, d_contrib = get_contributions(pred_test, descriptor_scores, split, minimal_columns_total)
         contribs.append(d_contrib)
 

@@ -1,0 +1,13 @@
+feature,tau_c
+Pitch Entropy (R),0.583
+Pitch Set LZ (L),0.583
+Pitch Entropy (L),0.582
+Pitch Set LZ (R),0.573
+Pitch Range (L),0.567
+Pitch Range (R),0.554
+Displacement Rate (R),0.332
+Displacement Rate (L),0.273
+Average IOI (R),-0.209
+Average IOI (L),-0.208
+Average Pitch (R),0.088
+Average Pitch (L),0.017
