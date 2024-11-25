@@ -15,7 +15,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from sampler import ImbalancedDatasetSampler
+from rubricnet.sampler import ImbalancedDatasetSampler
 from sklearn.metrics import balanced_accuracy_score, mean_squared_error
 
 

@@ -135,6 +135,8 @@ def main():
         features_selected = list(columns)
         X_train = pd.DataFrame({ft: [features[f][ft] for f in ids_train] for ft in features_selected})
         scaler = preprocessing.StandardScaler().fit(X_train)
+        # save scaler
+        # pd.to_pickle(scaler, f"../checkpoints/rubricnet_cameraready/scaler_{split}.pkl")
         X_val = pd.DataFrame({ft: [features[f][ft] for f in ids_val] for ft in features_selected})
         X_test = pd.DataFrame({ft: [features[f][ft] for f in ids_test] for ft in features_selected})
 

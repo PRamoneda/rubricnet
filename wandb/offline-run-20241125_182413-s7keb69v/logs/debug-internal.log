@@ -1,0 +1,15 @@
+{"time":"2024-11-25T18:24:13.447770363+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-25T18:24:13.447963998+01:00","level":"INFO","msg":"created symlink","path":"wandb/offline-run-20241125_182413-s7keb69v/logs/debug-core.log"}
+{"time":"2024-11-25T18:24:13.557524099+01:00","level":"INFO","msg":"created new stream","id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.557605706+01:00","level":"INFO","msg":"stream: started","id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.557741286+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.557819897+01:00","level":"INFO","msg":"sender: started","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.557850653+01:00","level":"INFO","msg":"handler: started","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.573303947+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-25T18:24:13.855347769+01:00","level":"INFO","msg":"stream: closing","id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.85542018+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-25T18:24:13.856461385+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-25T18:24:13.856910742+01:00","level":"INFO","msg":"handler: closed","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.856955645+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.856960403+01:00","level":"INFO","msg":"sender: closed","stream_id":"s7keb69v"}
+{"time":"2024-11-25T18:24:13.857056685+01:00","level":"INFO","msg":"stream: closed","id":"s7keb69v"}

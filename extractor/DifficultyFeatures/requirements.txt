@@ -1,0 +1,10 @@
+sortedcontainers
+pandas
+music21
+seaborn
+lxml
+scipy
+scikit-learn
+torch
+torchvision
+torchaudio

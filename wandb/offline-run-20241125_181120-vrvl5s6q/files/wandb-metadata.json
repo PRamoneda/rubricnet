@@ -1,0 +1,42 @@
+{
+  "os": "Linux-6.8.0-49-generic-x86_64-with-glibc2.17",
+  "python": "3.8.20",
+  "startedAt": "2024-11-25T17:11:20.580302Z",
+  "program": "/home/pedro/PycharmProjects/Rubricnet/predict.py",
+  "codePath": "predict.py",
+  "git": {
+    "remote": "https://github.com/PRamoneda/cr_rubricnet.git",
+    "commit": "a9de0a52acec32215d134953dce4e44900e56fae"
+  },
+  "root": ".",
+  "host": "pedro-17U70Q-P-AA78B",
+  "username": "pedro",
+  "executable": "/home/pedro/miniconda3/envs/Rubricnet/bin/python",
+  "codePathLocal": "predict.py",
+  "cpu_count": 12,
+  "cpu_count_logical": 16,
+  "gpu": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1005867986944",
+      "used": "777785876480"
+    }
+  },
+  "memory": {
+    "total": "16496189440"
+  },
+  "cpu": {
+    "count": 12,
+    "countLogical": 16
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+      "memoryTotal": "4294967296",
+      "cudaCores": 2560,
+      "architecture": "Ampere"
+    }
+  ],
+  "cudaVersion": "12.2"
+}

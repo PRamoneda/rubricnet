@@ -1,0 +1,26 @@
+2024-11-25 18:16:02,866 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-25 18:16:02,866 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Configure stats pid to 40426
+2024-11-25 18:16:02,866 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Loading settings from /home/pedro/.config/wandb/settings
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Loading settings from /home/pedro/PycharmProjects/Rubricnet/wandb/settings
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'predict.py', 'program_abspath': '/home/pedro/PycharmProjects/Rubricnet/predict.py', 'program': '/home/pedro/PycharmProjects/Rubricnet/predict.py'}
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_init.py:_log_setup():533] Logging user logs to ./wandb/offline-run-20241125_181602-9jcnbkyi/logs/debug.log
+2024-11-25 18:16:02,867 INFO    MainThread:40426 [wandb_init.py:_log_setup():534] Logging internal logs to ./wandb/offline-run-20241125_181602-9jcnbkyi/logs/debug-internal.log
+2024-11-25 18:16:02,868 INFO    MainThread:40426 [wandb_init.py:init():619] calling init triggers
+2024-11-25 18:16:02,868 INFO    MainThread:40426 [wandb_init.py:init():626] wandb.init called with sweep_config: {}
+config: {}
+2024-11-25 18:16:02,868 INFO    MainThread:40426 [wandb_init.py:init():669] starting backend
+2024-11-25 18:16:02,868 INFO    MainThread:40426 [wandb_init.py:init():673] sending inform_init request
+2024-11-25 18:16:02,895 INFO    MainThread:40426 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-11-25 18:16:02,897 INFO    MainThread:40426 [wandb_init.py:init():686] backend started and connected
+2024-11-25 18:16:02,928 INFO    MainThread:40426 [wandb_init.py:init():781] updated telemetry
+2024-11-25 18:16:02,969 INFO    MainThread:40426 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-25 18:16:03,037 INFO    MainThread:40426 [wandb_init.py:init():867] starting run threads in backend
+2024-11-25 18:16:03,437 INFO    MainThread:40426 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-25 18:16:03,437 INFO    MainThread:40426 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-25 18:16:03,437 INFO    MainThread:40426 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-25 18:16:03,437 INFO    MainThread:40426 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-25 18:16:03,444 INFO    MainThread:40426 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-25 18:16:03,446 INFO    MainThread:40426 [wandb_run.py:_config_callback():1387] config_cb None None {'lr': 0.01, 'batch_size': 32, 'hidden_size': 64, 'num_layers': 2, 'dropout': 0.1, 'decay_lr': 0.5, 'weight_decay': 0.01, 'patience': 10, 'alias_experiment': 'fake_experiment'}
+2024-11-25 18:17:31,907 WARNING MsgRouterThr:40426 [router.py:message_loop():75] message_loop has been closed

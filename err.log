@@ -1,0 +1,40 @@
+mala
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 21, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+NameError: name 'features_extractor' is not defined
+WARNING:  Fatal error (nothing is written)
+mala
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 21, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+NameError: name 'features_extractor' is not defined
+WARNING:  Fatal error (nothing is written)
+mala
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 21, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+NameError: name 'features_extractor' is not defined
+WARNING:  Fatal error (nothing is written)
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 63, in extract_raw_data_map
+    metronome_marks, time_signatures, first_measure_n = extract_metr_events_and_first_measure_number(m21_stream_with_metronome_marks)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 138, in extract_metr_events_and_first_measure_number
+    for mm in m21_stream.recurse().getElementsByClass(m21.tempo.MetronomeMark):
+AttributeError: 'NoneType' object has no attribute 'recurse'
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 63, in extract_raw_data_map
+    metronome_marks, time_signatures, first_measure_n = extract_metr_events_and_first_measure_number(m21_stream_with_metronome_marks)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 138, in extract_metr_events_and_first_measure_number
+    for mm in m21_stream.recurse().getElementsByClass(m21.tempo.MetronomeMark):
+AttributeError: 'NoneType' object has no attribute 'recurse'
+WARNING:  Fatal error (nothing is written)
+
