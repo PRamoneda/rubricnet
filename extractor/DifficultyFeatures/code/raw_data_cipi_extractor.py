@@ -8,7 +8,8 @@ import glob
 import json
 
 from raw_data_extractors import INSTRUMENT_FEATURE_EXTRACTORS, \
-    print_warnings, get_default_metronome_mark, convert_offsets, dump_raw_data, load_raw_data, CIPIFeatureExtractor
+    print_warnings, get_default_metronome_mark, convert_offsets, dump_raw_data, load_raw_data, CIPIFeatureExtractor, \
+    features_extractor
 
 
 def get_args():

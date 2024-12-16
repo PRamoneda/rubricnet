@@ -38,3 +38,234 @@ Traceback (most recent call last):
 AttributeError: 'NoneType' object has no attribute 'recurse'
 WARNING:  Fatal error (nothing is written)
 
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 66, in extract_raw_data_map
+    raise MissedMetronomeMarkException()
+extractor.DifficultyFeatures.code.raw_data_extractors.MissedMetronomeMarkException
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 66, in extract_raw_data_map
+    raise MissedMetronomeMarkException()
+extractor.DifficultyFeatures.code.raw_data_extractors.MissedMetronomeMarkException
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 66, in extract_raw_data_map
+    raise MissedMetronomeMarkException()
+extractor.DifficultyFeatures.code.raw_data_extractors.MissedMetronomeMarkException
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 66, in extract_raw_data_map
+    raise MissedMetronomeMarkException()
+extractor.DifficultyFeatures.code.raw_data_extractors.MissedMetronomeMarkException
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 49, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 66, in extract_raw_data_map
+    raise MissedMetronomeMarkException()
+extractor.DifficultyFeatures.code.raw_data_extractors.MissedMetronomeMarkException
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 201, in extract_raw_data_map_from_streams
+    result = super().extract_raw_data_map_from_streams(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 103, in extract_raw_data_map_from_streams
+    raw_map.update(rhythm_tempo_features(m21_expanded_stream_with_metronome_marks))
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 308, in rhythm_tempo_features
+    metronomeMark = find_metronome_mark(measures)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+Exception: No metronome mark
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 201, in extract_raw_data_map_from_streams
+    result = super().extract_raw_data_map_from_streams(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 103, in extract_raw_data_map_from_streams
+    raw_map.update(rhythm_tempo_features(m21_expanded_stream_with_metronome_marks))
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 308, in rhythm_tempo_features
+    metronomeMark = find_metronome_mark(measures)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+Exception: No metronome mark
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 201, in extract_raw_data_map_from_streams
+    result = super().extract_raw_data_map_from_streams(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 103, in extract_raw_data_map_from_streams
+    raw_map.update(rhythm_tempo_features(m21_expanded_stream_with_metronome_marks))
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 308, in rhythm_tempo_features
+    metronomeMark = find_metronome_mark(measures)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+Exception: No metronome mark
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 201, in extract_raw_data_map_from_streams
+    result = super().extract_raw_data_map_from_streams(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 103, in extract_raw_data_map_from_streams
+    raw_map.update(rhythm_tempo_features(m21_expanded_stream_with_metronome_marks))
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 308, in rhythm_tempo_features
+    metronomeMark = find_metronome_mark(measures)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 755, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 412, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 201, in extract_raw_data_map_from_streams
+    result = super().extract_raw_data_map_from_streams(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 103, in extract_raw_data_map_from_streams
+    raw_map.update(rhythm_tempo_features(m21_expanded_stream_with_metronome_marks))
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 308, in rhythm_tempo_features
+    metronomeMark = find_metronome_mark(measures)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 298, in find_metronome_mark
+    raise Exception('No metronome mark')
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 755, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 412, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 71, in extract_raw_data_map
+    m21_stream_with_metronome_marks = propagate_metr_events_to_parts(m21_stream_with_metronome_marks, metronome_marks)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 179, in propagate_metr_events_to_parts
+    return m21_stream
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 179, in propagate_metr_events_to_parts
+    return m21_stream
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 892, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 412, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 71, in extract_raw_data_map
+    m21_stream_with_metronome_marks = propagate_metr_events_to_parts(m21_stream_with_metronome_marks, metronome_marks)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 168, in propagate_metr_events_to_parts
+    for measure in measure_stream.recurse().getElementsByClass(m21.stream.Measure):
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/common_utils.py", line 168, in propagate_metr_events_to_parts
+    for measure in measure_stream.recurse().getElementsByClass(m21.stream.Measure):
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 755, in trace_dispatch
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 412, in do_wait_suspend
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+  File "/snap/pycharm-professional/429/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 274, in extract_raw_data_map_from_streams
+    lh_segments_by_bar, lh_segments_by_meter_tempo = rhythm_segments(lh_part, offset_map, warnings_set, ignore_tempo_marks=True)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/rhythm_chart.py", line 572, in rhythm_segments
+    raise Exception('Missed tempo mark or time signature')
+Exception: Missed tempo mark or time signature
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 274, in extract_raw_data_map_from_streams
+    lh_segments_by_bar, lh_segments_by_meter_tempo = rhythm_segments(lh_part, offset_map, warnings_set, ignore_tempo_marks=True)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/rhythm_chart.py", line 572, in rhythm_segments
+    raise Exception('Missed tempo mark or time signature')
+Exception: Missed tempo mark or time signature
+WARNING:  Fatal error (nothing is written)
+
+An error occurred:
+Traceback (most recent call last):
+  File "/home/pedro/PycharmProjects/Rubricnet/predict.py", line 51, in extract_features
+    raw_data_map = features_extractor.extract_raw_data_map(
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 82, in extract_raw_data_map
+    result = self.extract_raw_data_map_from_streams(m21_stream, m21_stream_with_metronome_marks,
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/raw_data_extractors.py", line 274, in extract_raw_data_map_from_streams
+    lh_segments_by_bar, lh_segments_by_meter_tempo = rhythm_segments(lh_part, offset_map, warnings_set, ignore_tempo_marks=True)
+  File "/home/pedro/PycharmProjects/Rubricnet/extractor/DifficultyFeatures/code/rhythm_chart.py", line 572, in rhythm_segments
+    raise Exception('Missed tempo mark or time signature')
+Exception: Missed tempo mark or time signature
+WARNING:  Fatal error (nothing is written)
+

@@ -10,5 +10,6 @@ torchvision
 torchaudio
 jupyter
 notebook
+sortedcontainers
 wandb
 lightning

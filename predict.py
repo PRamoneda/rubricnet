@@ -5,6 +5,7 @@ from os.path import split, splitext
 from itertools import chain, combinations
 from statistics import mean, stdev
 
+from music21.tempo import MetronomeMark
 from sklearn import preprocessing
 from sklearn.metrics import balanced_accuracy_score, mean_squared_error
 
@@ -44,14 +45,13 @@ def extract_features(xml_path, debug=False, files_directory="tmp", ignore_warnin
 
     warnings_set = set()
     try:
+        default_metronome_mark = MetronomeMark(100)
         bpm_map = None
         features_extractor = CIPIFeatureExtractor()
         raw_data_map = features_extractor.extract_raw_data_map(
             [xml_path],
             warnings_set,
-            metronome_mark=get_default_metronome_mark(
-                "42", default_metronome_mark, bpm_map
-            ),
+            metronome_mark=default_metronome_mark,
             ignore_warnings=ignore_warnings
         )
     except BaseException as err:
@@ -116,6 +116,9 @@ def check_features_extractor():
                    key] == expected_value, f"Descriptor '{key}' value mismatch: expected {expected_value}, got {features[key]}"
 
 
+def scale_to_0_12(x, min_val=-12, max_val=12):
+    return (x - min_val) / (max_val - min_val) * 12
+
 
 def load_model_and_predict(features):
     """
@@ -126,12 +129,12 @@ def load_model_and_predict(features):
     difficulties_split = {}
     for split in range(5):
         clf = RubricnetSklearn(input_dim=len(features), num_classes=9, args=args)
-        clf.load_model(f"checkpoints/rubricnet_cameraready/split_{split}.ckpt")
-        scaler = pd.read_pickle(f"checkpoints/rubricnet_cameraready/scaler_{split}.pkl")
+        clf.load_model(f"~/PycharmProjects/Rubricnet/checkpoints/rubricnet_cameraready/split_{split}.ckpt")
+        scaler = pd.read_pickle(f"~/PycharmProjects/Rubricnet/checkpoints/rubricnet_cameraready/scaler_{split}.pkl")
         scaled_features = scaler.transform([list(features.values())])
         difficulty = clf.predict(scaled_features)[0].detach().cpu().item()
         regression = clf.predict_regression(scaled_features).item()
-        difficulties_split[split] = [difficulty, regression]
+        difficulties_split[split] = [difficulty, scale_to_0_12(regression)]
     return difficulties_split
 
 
