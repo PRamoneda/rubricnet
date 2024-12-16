@@ -1,9 +1,10 @@
 # Rubricnet
 
-Paper in review. F. Author, S. Author, and T. Author, “Towards Explainable
-and Interpretable Musical Difficulty Estimation: A parameter-efficient
-approach”, in Proc. of the 25th Int. Society for Music Information Re-
-trieval Conf., San Francisco, USA, 2024
+P. Ramoneda, V.
+Eremenko, A. D’Hooge, E. Parada-Cabaleiro, X. Serra, “Towards Ex-
+plainable and Interpretable Musical Difficulty Estimation: A parameter-
+efficient approach”, in Proc. of the 25th Int. Society for Music Informa-
+tion Retrieval Conf., San Francisco, USA, 2024.
 
 ## Disclaimer
 
@@ -31,7 +32,7 @@ illustrate how building on top of past research can  offer alternatives for musi
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/anonymous/anonymous.git
+   git clone https://github.com/PRamoneda/rubricnet/rubricnet.git
    ```
    
 2. Install dependencies:
