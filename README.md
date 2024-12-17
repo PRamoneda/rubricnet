@@ -2,10 +2,6 @@
 
 P. Ramoneda, V. Eremenko, A. D’Hooge, E. Parada-Cabaleiro, X. Serra, “Towards Explainable and Interpretable Musical Difficulty Estimation: A parameter-efficient approach”, in Proc. of the 25th Int. Society for Music Information Retrieval Conf., San Francisco, USA, 2024.
 
-## Disclaimer
-
->> Please note that this repository is currently a work in progress. The final code and its components are under active development and may undergo significant changes for usability. The final, stable version of the project will be uploaded after its formal acceptance for future use. We encourage users to check back regularly for updates and improvements.
-
 
 ## Abstract
 
