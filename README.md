@@ -1,10 +1,6 @@
 # Rubricnet
 
-P. Ramoneda, V.
-Eremenko, A. D’Hooge, E. Parada-Cabaleiro, X. Serra, “Towards Ex-
-plainable and Interpretable Musical Difficulty Estimation: A parameter-
-efficient approach”, in Proc. of the 25th Int. Society for Music Informa-
-tion Retrieval Conf., San Francisco, USA, 2024.
+P. Ramoneda, V. Eremenko, A. D’Hooge, E. Parada-Cabaleiro, X. Serra, “Towards Explainable and Interpretable Musical Difficulty Estimation: A parameter-efficient approach”, in Proc. of the 25th Int. Society for Music Information Retrieval Conf., San Francisco, USA, 2024.
 
 ## Disclaimer
 
